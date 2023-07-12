@@ -1,6 +1,6 @@
 package R::CLI::SlotsShort;
 use feature 'switch';
-use 5.32.1;    # CentOS 7 from previous century already includes Perl 5.16.1!
+use 5.16.1;    # CentOS 7 from previous century already includes Perl 5.16.1!
 use strict;
 use warnings;
 no warnings 'experimental';
@@ -37,7 +37,7 @@ sub slots_short(@) {
     my @array  = @_;
     my $result = '';
 
-    return FALSE unless every_el_is_num(@array);
+    return FALSE unless every_el_is_pos_num(@array);
 
     my @short_arr       = (0 .. $#array);
     my $short_arr_index = 0;
@@ -67,8 +67,8 @@ sub get_element ($$) {
     return ($lbound .. $rbound);
 }
 
-sub every_el_is_num (@) {
-    all {looks_like_number($_) and $_ > 0} @_;
+sub every_el_is_pos_num (@) {
+    all {looks_like_number($_) and $_ >= 0} @_;
 }
 
 sub is_stackable ($@) {
